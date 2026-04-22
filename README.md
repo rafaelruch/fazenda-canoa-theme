@@ -1,87 +1,103 @@
-# Fazenda Canoa — WordPress Block Theme
+# Fazenda Canoa — Block Theme WordPress
 
-> Block theme oficial da Landing Page **Reserva Fazenda Canoa** — estrutura pronta para deploy via **Deployer for Git**, WP-CLI ou upload manual. Os arquivos do tema estão no **root** deste repositório (padrão WordPress).
-
-**Site:** [lago.fazendacanoa.com.br](https://lago.fazendacanoa.com.br)
-**Autor:** [RUCH](https://ruch.digital)
-**Repositório principal (com protótipo e docs):** [lago-fazenda-canoa](https://github.com/rafaelruch/lago-fazenda-canoa)
-**Plugin dependente:** [lfc-opcoes-plugin](https://github.com/rafaelruch/lfc-opcoes-plugin)
-
----
-
-## 🚀 Deploy via Deployer for Git
-
-1. No admin WordPress → **Deployer for Git** → Adicionar
-2. **URL do repositório:** `https://github.com/rafaelruch/fazenda-canoa-theme.git`
-3. **Pasta destino:** `wp-content/themes/fazenda-canoa`
-4. **Branch:** `main`
-5. Salvar e executar o deploy
-
-Depois:
-- **Aparência → Temas** → ativar **"Fazenda Canoa"**
-- **Plugins** → ativar **"Fazenda Canoa — Opções & Leads"** (do repo [lfc-opcoes-plugin](https://github.com/rafaelruch/lfc-opcoes-plugin))
-- **Configurações → Fazenda Canoa** → revisar contatos
+Tema block-nativo da Landing Page do Condomínio Reserva Fazenda Canoa. Versão **1.0.0** — Desenvolvido por [RUCH](https://ruch.digital).
 
 ## 📁 Estrutura
 
 ```
-(root do repo) = tema fazenda-canoa
-├── style.css            # Declaração do tema
-├── theme.json           # Design tokens
-├── functions.php
-├── index.php
-├── screenshot.png
-├── README.md            # Este arquivo
-├── MANUAL-EDICAO.md     # Manual pro time comercial
-├── inc/                 # SEO + Performance
-│   ├── seo.php          # Structured Data + meta tags + GSC/GA4/Pixel
-│   └── performance.php  # Preload LCP + cleanup WP bloat + security headers
-├── templates/           # front-page, index, landing-page
-├── parts/               # header, footer, floating-widget
-├── patterns/            # 9 block patterns editáveis
+fazenda-canoa/
+├── style.css               # Declaração do tema
+├── theme.json              # Design tokens (cores, typography, spacing)
+├── functions.php           # Enqueues e registro de pattern category
+├── index.php               # Fallback vazio (block themes não usam)
+├── screenshot.png          # Preview no Aparência → Temas
+├── templates/
+│   ├── front-page.html     # Template da home (com todos os patterns)
+│   ├── index.html          # Fallback
+│   └── landing-page.html   # Template customizado para páginas
+├── parts/
+│   ├── header.html         # Nav superior + menu mobile
+│   ├── footer.html         # Rodapé com 4 colunas + legal
+│   └── floating-widget.html# Widget flutuante + mini FAB + modal
+├── patterns/
+│   ├── hero.php            # Hero com slideshow
+│   ├── oferta.php          # Card Lançamento II
+│   ├── tipologias.php      # Grid de 3 cards
+│   ├── lote-padrao.php     # Features do lote
+│   ├── lazer.php           # Galeria + 22 amenidades
+│   ├── localizacao.php     # Mapa Google + distâncias
+│   ├── incorporadora.php   # FRSC
+│   ├── consultor.php       # Canais + formulário
+│   └── faq.php             # 8 perguntas
 └── assets/
-    ├── css/main.css
-    ├── js/main.js
-    ├── fotos/           # 37 fotos otimizadas (17MB total)
-    └── logos/           # 7 logos + favicon
+    ├── css/main.css        # Stylesheet completo
+    ├── js/main.js          # Slideshow, modal, widget, scrollspy
+    ├── fotos/              # 37 fotos otimizadas (max 1600px / ~500KB)
+    └── logos/              # 7 variações de logo + favicon
 ```
 
-## ✨ Features
+## 🔌 Dependências
 
-- **Block theme 100% nativo** (FSE) — editável via Site Editor do WP
-- **9 block patterns** (1 por seção) — edição livre de conteúdo
-- **Template parts** com placeholders dinâmicos resolvidos via filter `render_block`
-- **Structured Data (Schema.org JSON-LD)** — WebSite, Organization, RealEstateListing, Place, BreadcrumbList, FAQPage
-- **Meta tags SEO completas** + Open Graph + Twitter Cards + Geo tags
-- **Performance** — preload LCP, dns-prefetch, JS deferred, lazy loading
-- **Cleanup WordPress bloat** — emoji scripts, generator, RSS, oembed, wlwmanifest, XML-RPC
-- **Security headers** — X-Content-Type-Options, X-Frame-Options, Referrer-Policy, Permissions-Policy
-- **Integrações Google/Meta** — campos para GSC verification, GA4 ID, Meta Pixel ID (via plugin `lfc-opcoes`)
-- **Admin bar compatibility** — nav não some atrás da barra do WP quando logado
-- **Imagens otimizadas** — 539MB→17MB (97% redução, max 1600px, quality 82)
+- **WordPress 6.5+**
+- **Plugin `lfc-opcoes`** (entregue junto) — contatos globais + CPT Leads + endpoint AJAX + webhook
 
-## 🔧 Dependências
+## 🎨 Design Tokens (theme.json)
 
-- WordPress **6.5+**
-- PHP **7.4+**
-- Plugin [`lfc-opcoes`](https://github.com/rafaelruch/lfc-opcoes-plugin) (contatos globais + CPT Leads + webhook)
+Cores da paleta disponíveis no editor:
+- `paper` `#FFFFFF` / `paper-soft` `#F7F6F2` / `paper-mid` `#EFEDE6`
+- `ink` `#1A1A1A` / `text-2` `#4A4A4A` / `text-mute` `#7A7A7A`
+- `accent` `#1F7A3F` / `accent-2` `#2E8F4F`
+- `warning` `#B8710F` (corten) / `warning-soft` `#FDF5E8`
+- `whatsapp` `#25D366`
 
-## 🎨 Design tokens principais
+**Tipografia:** Manrope (300, 400, 500, 600, 700) — carregada via Google Fonts.
 
-| Token | Valor |
-|---|---|
-| `paper` | `#FFFFFF` |
-| `ink` | `#1A1A1A` |
-| `accent` | `#1F7A3F` (verde natureza) |
-| `warning` | `#B8710F` (corten) |
-| `whatsapp` | `#25D366` |
-| Tipografia | **Manrope** 300–700 |
-| Container | 1180px |
+**Layout:** `contentSize: 1180px` · `wideSize: 1440px`
 
-## 📝 Licença
+## 🚀 Ativação
 
-GPL-2.0-or-later
+1. Instale o plugin `lfc-opcoes` primeiro (em `wp-content/plugins/`)
+2. Ative em **Plugins**
+3. Ative o tema em **Aparência → Temas**
+4. Configure contatos em **Configurações → Fazenda Canoa**
+5. Crie uma página (Pages → Add New) e use o template **"Landing Page (Lago Fazenda Canoa)"** ou simplesmente defina-a como **front page** em Settings → Reading
+6. Os patterns já ficam disponíveis no editor de blocos (categoria **Fazenda Canoa**)
 
----
+## ✏️ Como o time edita conteúdo
 
-Desenvolvido por [RUCH](https://ruch.digital).
+Ver arquivo `MANUAL-EDICAO.md` no admin (ou [manual completo](#manual-de-edição) abaixo).
+
+Áreas totalmente editáveis via admin:
+- Textos em todos os patterns (via Gutenberg)
+- Fotos (via biblioteca de mídia do WP)
+- WhatsApp, e-mail, telefone, horário, book URL (em Configurações → Fazenda Canoa)
+- Ordem das seções (arrastar no editor da página)
+- Adicionar/remover seções
+
+## 🔄 Fluxo de lead
+
+1. Usuário preenche modal ou formulário
+2. JavaScript envia via AJAX para `admin-ajax.php?action=lfc_submit_lead`
+3. Plugin salva como CPT `lfc_lead` (visível em admin → **Leads**)
+4. Se webhook estiver configurado → dispara POST JSON para URL (n8n/RD/Zapier)
+5. Navegador abre WhatsApp com mensagem pré-preenchida
+6. Lead também fica persistido em `localStorage.fcanoa_leads` (backup client-side)
+
+## 🔐 Segurança
+
+- Nonce em todos os submits (`_nonce: lfc_lead`)
+- Honeypot field `website` anti-bot
+- Sanitização server-side (sanitize_text_field, sanitize_email, esc_url_raw)
+- Webhook secret opcional (header `X-LFC-Secret`)
+- CPT `lfc_lead` com `create_posts` → `do_not_allow` (ninguém cria via admin)
+
+## 📝 Changelog
+
+### v1.0.0 (2026-04-15)
+- Scaffold inicial do block theme
+- 9 block patterns migrados do protótipo HTML aprovado
+- Plugin lfc-opcoes com página de opções, CPT Leads, endpoint AJAX e webhook
+- Integração com WhatsApp 5562999593530
+- Google Maps embedado (coord -16.3195247, -48.4709649)
+- Widget flutuante com minimização
+- Modais de captação (9 contextos + modo book)
